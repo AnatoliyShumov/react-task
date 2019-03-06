@@ -42,6 +42,7 @@ class TD extends React.Component {
         super(props)
         this.state = {
             editing: false,
+            prevValue: this.props.value,
             value: this.props.value
         }
     }
@@ -59,7 +60,13 @@ class TD extends React.Component {
        const {onChangeTable, rowId, type} = this.props;
        const {value} = this.state;
        onChangeTable(rowId, type, value);
-       this.setState({editing: false})
+       this.setState({editing: false, prevValue: this.state.value})
+   }
+   handleCancel = ()=> {
+
+        this.setState({editing:false,
+            value: this.state.prevValue
+        })
    }
 
     render() {
@@ -68,9 +75,10 @@ class TD extends React.Component {
         if(!!editing) {
             return (
                 <td type={`td-${type}`} >
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} >
                         <input type="text" value={value} onChange={this.handleChange}/>
                         <input type="submit"  value="save"/>
+                        <input type="button" value="cancel" onClick={this.handleCancel}/>
                     </form>
                 </td>
             )
@@ -148,11 +156,28 @@ export default class Table extends React.Component {
                 this.setState({ persons });
             })
     }
+
+
     handleChangeTable = (id,type,value, ) =>{
-        console.log("id:", id)
-        console.log("type:", type)
-        console.log("value:", value)
+        const data = {
+            name: "Oles"
+        }
+        //let dataJ = JSON.stringify(data);
+        console.log("id:", id);
+        console.log("type:", type);
+        console.log("value:", value);
+
+        axios({
+            method: 'put',
+            url: `localhost:8080/update/${id}`,
+            data: {
+               name:"Oles"
+            }
+        });
+
     }
+
+    
     render() {
         return (
             <React.Fragment>
