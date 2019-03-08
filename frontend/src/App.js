@@ -1,77 +1,54 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import logo from './logo.svg';
 import './App.css';
 
-
-
-class TableInput extends React.Component{
-
-    clickRow(e) {
-        if (this.state.editing === false) {
-            console.log("privet")
-        }
-    }
-render() {
-    return (
-        <a>aaaaaaa</a>
-    );
-}
-}
-
-
-class Row extends React.Component  {
-
-    render() {
-        const { onChangeTable } = this.props;
-        return (
-            <tr className='table-tr'>
-                <TD onChangeTable={onChangeTable} value={this.props.id} type="id" rowId={this.props.id} />
-                <td className="td-name"  onClick={this.clickRow}>{this.props.name}</td>
-                <td className="td-email" onClick={this.clickRow}>{this.props.email}</td>
-                <td className="td-funds" onClick={this.clickRow}>{this.props.funds}</td>
-                <td className="td-city"  onClick={this.clickRow}>{this.props.city}</td>
-                <td className="td-phone" onClick={this.clickRow}>{this.props.phone}</td>
-            </tr>
-        )
-    }
-}
-
-class TD extends React.Component {
+class TD extends Component {
     constructor(props) {
         super(props)
+        const { person, type} = props;
         this.state = {
             editing: false,
-            prevValue: this.props.value,
-            value: this.props.value
+            prevValue: person[type],
+            value: person[type],
+            person
         }
     }
-   handleClick = (e) =>{
-        if(this.state.editing === false) {
-            this.setState({editing:true})
+    //handleClickTD
+    handleClick = () => {
+        if (this.state.editing === false) {
+            this.setState({editing: true})
         }
-   }
-   handleChange = (e)=> {
+    }
+    handleChange = (e) => {
         const value = e.target.value
         this.setState({value})
-   }
-   handleSubmit = (e)=> {
-       e.preventDefault();
-       const {onChangeTable, rowId, type} = this.props;
-       const {value} = this.state;
-       onChangeTable(rowId, type, value);
-       this.setState({editing: false, prevValue: this.state.value})
-   }
-   handleCancel = ()=> {
+    }
+    //props не чіпати, записати в стайт
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const {onChangeTable, person, type} = this.props;
+        const {value} = this.state;
+        // person[type] = value;
+        onChangeTable(type, value);
 
-        this.setState({editing:false,
+        this.setState({
+            editing: false,
+            prevValue: value
+        })
+    }
+
+    handleCancel = () => {
+        this.setState({
+            //деструктуризувати prev
+            editing:false,
             value: this.state.prevValue
         })
-   }
+    }
 
     render() {
         const {editing, value} = this.state;
         const {type} = this.props
+        // винести в окрему функцію
         if(!!editing) {
             return (
                 <td type={`td-${type}`} >
@@ -91,53 +68,46 @@ class TD extends React.Component {
     }
 
 }
-const THead = () => {
-    return(
-        <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>EMAIL</th>
-            <th>FUNDS</th>
-            <th>CITY</th>
-            <th>PHONE</th>
+// type розмапити
+const Row = ({onChangeTable, person}) => {
+    return (
+        <tr className='table-tr'>
+            <TD onChangeTable={onChangeTable} person={person}  type="id" />
+            <TD onChangeTable={onChangeTable} person={person}  type="name" />
+            <TD onChangeTable={onChangeTable} person={person}  type="email"     />
+            <TD onChangeTable={onChangeTable} person={person}  type="funds"  />
+            <TD onChangeTable={onChangeTable} person={person}  type="city"  />
+            <TD onChangeTable={onChangeTable} person={person}  type="phone"/>
         </tr>
     )
-
 }
 
-class TableRow extends React.Component{
-
-
-
-    render() {
-         // Деструктуризація обєкту
-        const { onChangeTable } = this.props;
-
-        // Теж саме що хуйня знизу
-        // const onChangeTable = this.props.onChangeTable;
-
-        return (
-            <table>
-                <tbody>
-
-                <THead />
-                    {/*{this.state.show && <p>hello!</p>}*/}
-                    { this.props.persons.map(person => { return <Row key={person.id} onChangeTable={onChangeTable}  clickRow={this.clickRow} name={person.name} phone={person.phone}
-                                                            id={person.id} email={person.email} funds={person.funds}
-                                                            city={person.city}/>}
-                    )}
-                </tbody>
-            </table>
-
-
-        )
-    }
+const Table = ({onChangeTable, persons}) => {
+    return (
+        <table>
+            <tbody>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>FUNDS</th>
+                <th>CITY</th>
+                <th>PHONE</th>
+            </tr>
+            { persons.map(person => (
+                <Row
+                    key={person.id}
+                    onChangeTable={onChangeTable}
+                    person={person}
+                />)
+            )}
+            </tbody>
+        </table>
+    )
 }
-
-export default class Table extends React.Component {
+export default class App extends React.Component {
     state = {
-        persons: [],
-        show: false
+        persons: []
     }
 
     componentDidMount() {
@@ -152,37 +122,28 @@ export default class Table extends React.Component {
                         return 1;
                     return 0;
                 })
-
+//catch дописати
                 this.setState({ persons });
             })
     }
 
 
-    handleChangeTable = (id,type,value, ) =>{
-        const data = {
-            name: "Oles"
-        }
-        //let dataJ = JSON.stringify(data);
-        console.log("id:", id);
-        console.log("type:", type);
-        console.log("value:", value);
-
+    handleChangeTable = (type, person ) =>{
         axios({
             method: 'put',
-            url: `localhost:8080/update/${id}`,
-            data: {
-               name:"Oles"
-            }
+            url: `http://localhost:8080/update/${person.id}`,
+            data: person
         });
-
     }
-
     
     render() {
         return (
             <React.Fragment>
-                <TableRow key={TableRow} onChangeTable={this.handleChangeTable} persons={this.state.persons}/>
-                <TableInput key='aaa' state={this.state}/>
+                <Table
+                    onChangeTable={this.handleChangeTable}
+                    persons={this.state.persons}
+                    //деструктуризувати
+                />
             </React.Fragment>
 
         )
