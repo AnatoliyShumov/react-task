@@ -5,55 +5,69 @@ import './App.css';
 class TD extends Component {
     constructor(props) {
         super(props)
-        const { person, type} = props;
+        const{type, person} = props;
         this.state = {
+            type,
+            person,
             editing: false,
-            prevValue: person[type],
-            value: person[type],
-            person
+            prevValue: this.props.person[type],
+            value: this.props.person[type],
         }
+        // по ідеї на момент інціалізації обєкта ми не можемо перезаписувати властивість обєкта в іншшу властивість як параметр загуглити як це правильно зробити,
+        // коли деструктеризуємо обєкт і потім записуємо його з пропс в стайт всі зміни ідуть і в пропс, це неправильно.
+        // походу значення передається по силці і у пропс, розібратись
     }
-    //handleClickTD
-    handleClick = () => {
+
+    handleClickTD = () => {
         if (this.state.editing === false) {
             this.setState({editing: true})
         }
     }
-    handleChange = (e) => {
+    handleChangeInput = (e) => {
         const value = e.target.value
         this.setState({value})
     }
-    //props не чіпати, записати в стайт
+
     handleSubmit = (e) => {
         e.preventDefault();
-        const {onChangeTable, person, type} = this.props;
-        const {value} = this.state;
-        // person[type] = value;
-        onChangeTable(type, value);
-
+        const {type, value} = this.state;
         this.setState({
             editing: false,
             prevValue: value
         })
+
+        this.setState(prevState => ({
+            person: {
+                ...prevState.person,
+                [type]: value
+            }
+        }))
     }
 
     handleCancel = () => {
+        const{prevValue} = this.state;
         this.setState({
-            //деструктуризувати prev
             editing:false,
-            value: this.state.prevValue
+            value: prevValue
         })
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const{person} = this.state;
+        const{onChangeTable} = this.props;
+        if(person !== prevState.person) {
+            onChangeTable(person)
+        }
+    }
+
     render() {
-        const {editing, value} = this.state;
-        const {type} = this.props
+        const {editing, value, type} = this.state
         // винести в окрему функцію
         if(!!editing) {
             return (
-                <td type={`td-${type}`} >
+                <td type={`td-${type}`}>
                     <form onSubmit={this.handleSubmit} >
-                        <input type="text" value={value} onChange={this.handleChange}/>
+                        <input type="text" value={value} onChange={this.handleChangeInput}/>
                         <input type="submit"  value="save"/>
                         <input type="button" value="cancel" onClick={this.handleCancel}/>
                     </form>
@@ -62,7 +76,7 @@ class TD extends Component {
         }
         else{
             return (
-                <td type={`td-${type}`} onClick={this.handleClick}>{value}</td>
+                <td type={`td-${type}`} onClick={this.handleClickTD}>{value}</td>
             )
         }
     }
@@ -82,7 +96,7 @@ const Row = ({onChangeTable, person}) => {
     )
 }
 
-const Table = ({onChangeTable, persons}) => {
+const Table = ({persons, onChangeTable}) => {
     return (
         <table>
             <tbody>
@@ -105,6 +119,7 @@ const Table = ({onChangeTable, persons}) => {
         </table>
     )
 }
+
 export default class App extends React.Component {
     state = {
         persons: []
@@ -122,13 +137,15 @@ export default class App extends React.Component {
                         return 1;
                     return 0;
                 })
-//catch дописати
                 this.setState({ persons });
+            })
+            .catch((error) => {
+                console.log(error);
             })
     }
 
 
-    handleChangeTable = (type, person ) =>{
+    handleChangeTable = (person) =>{
         axios({
             method: 'put',
             url: `http://localhost:8080/update/${person.id}`,
@@ -137,12 +154,12 @@ export default class App extends React.Component {
     }
     
     render() {
+        const {persons} = this.state;
         return (
             <React.Fragment>
                 <Table
                     onChangeTable={this.handleChangeTable}
-                    persons={this.state.persons}
-                    //деструктуризувати
+                    persons={persons}
                 />
             </React.Fragment>
 
