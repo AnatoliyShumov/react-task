@@ -68,3 +68,10 @@ td:hover{
 td{
   cursor: default;
 }
+.pagination{
+  display: flex;
+  justify-content: center;
+}
+a {
+  cursor: pointer;
+}
