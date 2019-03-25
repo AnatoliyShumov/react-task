@@ -27,7 +27,7 @@ class Counter extends Component{
     loop = () => {
         const{to, from} = this.state;
         const {fps} = this.props;
-        if (this.frameId ) {
+        if (this.frameId) {
             setTimeout(()=> {
                 this.frameId = window.requestAnimationFrame( this.loop );
                 this.counter()
