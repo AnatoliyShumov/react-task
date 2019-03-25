@@ -1,14 +1,38 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from "axios";
+import Slider from "react-slick";
 
 
+class SimpleSlider extends React.Component {
+    render() {
+        const settings = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            arrows: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            // autoplay: true
+        };
+        return (
+            <div>
+                <h2> Single Item</h2>
+                <Slider {...settings}>
+                    {this.props.images.map(img => {
+                        return <div><img src={img} alt="" className="src"/></div>
+                    })}
+                </Slider>
+            </div>
+        );
+    }
+}
 class Images extends Component {
 
     render() {
     // this.props.posts.map(posts=>{console.log(posts)})
         return (
-            "a"
+            <img src={this.props.images[0]} alt="" className="src"/>
         )
     }
 }
@@ -47,7 +71,7 @@ class App extends Component {
               <div className="left-menu__apartments">
                 {/*<Images images={images}/>*/}
                   {posts.map(post => {
-                      return <Images images={post.images}/>
+                      return <SimpleSlider images={post.images}/>
                   })}
               </div>
               <div className="right-menu_apartments">
