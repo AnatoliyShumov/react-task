@@ -1,0 +1,16 @@
+.full-address__menu-info:first-child{
+  grid-area: icon;
+}
+.full-address__menu-info:last-child{
+  grid-area: location;
+}
+.full-address__menu-info{
+  display: grid;
+  align-items: center;
+  grid-gap: 10px;
+  grid-template-columns: 0.1fr 1fr;
+  grid-template-areas: "icon location";
+  i{
+    font-size: xx-large;
+  }
+}

@@ -1,0 +1,21 @@
+.slick-slider{
+  width: 300px;
+  height: 320px;
+  margin-bottom: 60px;
+}
+
+
+.slick-next {
+  right: 10px;
+}
+.slick-prev {
+  left: 10px;
+  z-index: 1;
+}
+
+
+
+.slider__menu-info{
+  grid-area: slider;
+}
+

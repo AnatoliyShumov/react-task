@@ -1,5 +1,6 @@
 import Slider from "react-slick/lib";
 import React from 'react';
+import './slider.scss'
 
 class SimpleSlider extends React.Component {
     constructor(props) {
@@ -23,11 +24,13 @@ class SimpleSlider extends React.Component {
             slidesToScroll: 1,
             // autoplay: true
         };
+        const{id} = this.props;
         return (
-            <div>
-                <Slider ref={c => (this.slider = c)} {...settings}>
+
+            <div className="slider__menu-info" >
+                <Slider  ref={c => (this.slider = c)} {...settings}>
                     {this.props.images.map((img, i, arr) => {
-                        return <div key={this.props.id}>
+                        return <div key={id}>
                             <img src={img} alt="" className="src"/>
                         </div>
                     })}

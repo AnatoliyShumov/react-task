@@ -1,0 +1,14 @@
+.price__menu-info:first-child{
+  grid-area: icon;
+}
+.price__menu-info:last-child{
+  grid-area: price;
+}
+.price__menu-info{
+  display: grid;
+  align-items: baseline;
+
+  grid-gap: 10px;
+  grid-template-columns: 0.1fr 1fr;
+  grid-template-areas: "icon price";
+}

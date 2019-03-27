@@ -5,7 +5,7 @@ import SimpleSlider from "./components/slider/simpleSlider"
 import Description from "./components/description/description"
 import Price from "./components/price/price"
 import Area from "./components/area/area"
-
+import FullAddress from "./components/full_adress/full_adres"
 
 class App extends Component {
     constructor(props) {
@@ -31,15 +31,16 @@ class App extends Component {
       <div className="App">
           <div className="container__apartments">
                   {posts.map(post => {
-                      const {id, images, price, description, area} = post;
+                      const {id, images, price, description, area, full_address, rating} = post;
                       return <React.Fragment>
                           <div className="menu__apartments">
-                              <SimpleSlider key={id} images={images} id={id}/>
+                              <SimpleSlider  key={id} images={images} rating={rating}id={id}/>
                               <div className="menu-info__apartments">
                                   <Description description={description}/>
-                                  <Price price={price}/>
+                                  <FullAddress full_address={full_address}/>
                                   <Area area={area}/>
                               </div>
+                              <Price price={price}/>
                           </div>
                       </React.Fragment>
                   })}

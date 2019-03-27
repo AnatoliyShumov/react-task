@@ -1,6 +1,7 @@
 
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -37,22 +38,31 @@ img{
   width: 300px;
   height: 300px;
 }
+.container__apartments{
+  margin:0 5% 0 5%;
+}
 
-.slick-slider{
-  width: 300px;
-  height: 320px;
-  margin-bottom: 60px;
+.menu-info__apartments{
+  grid-area: menu-info;
+}
+.price__menu-info{
+  grid-area: price;
+}
+.menu__apartments{
+  display: grid;
+  margin:5% 0 0 5%;
+
+  grid-gap: 60px;
+  border: 1px solid black;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+          "slider menu-info price "
+}
+
+p{
+  text-align: start;
+  line-height: 1.5;
 }
 
 
-.slick-prev:after {
-  content: "<";
-  color: red;
-  font-size: 30px;
-}
 
-.slick-next:before {
-  content: ">";
-  color: red;
-  font-size: 30px;
-}

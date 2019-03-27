@@ -1,0 +1,19 @@
+.description__menu-info:first-child{
+  grid-area: icon;
+  p{
+    grid-area: text;
+    text-align: justify;
+  }
+}
+
+.description__menu-info{
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 0.1fr 1fr;
+  grid-template-areas: "item text ";
+  align-items: start;
+  i{
+    padding-top: 16px;
+    font-size: xx-large;
+  }
+}
