@@ -21,25 +21,17 @@
   .slick-slider{
     width: 250px;
   }
-  img{
-    width: 100%;
-  }
 }
 
 @media  screen and (min-width: 363px) and (max-width: 640px) {
   .slick-slider{
    display: grid;
   }
-  img{
-    width: 100%;
-  }
+
 }
 @media  screen and (min-width: 640px){
   .slick-slider{
     width: 300px;
-  }
-  img{
-    width: 100%;
   }
 }
 
