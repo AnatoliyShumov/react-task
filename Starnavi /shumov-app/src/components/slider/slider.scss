@@ -1,5 +1,5 @@
 .slick-slider{
-  width: 300px;
+
   height: 320px;
   margin-bottom: 60px;
 }
@@ -13,9 +13,34 @@
   z-index: 1;
 }
 
-
-
 .slider__menu-info{
   grid-area: slider;
 }
+
+@media  screen and (min-width: 100px) and (max-width: 363px) {
+  .slick-slider{
+    width: 250px;
+  }
+  img{
+    width: 100%;
+  }
+}
+
+@media  screen and (min-width: 363px) and (max-width: 640px) {
+  .slick-slider{
+   display: grid;
+  }
+  img{
+    width: 100%;
+  }
+}
+@media  screen and (min-width: 640px){
+  .slick-slider{
+    width: 300px;
+  }
+  img{
+    width: 100%;
+  }
+}
+
 

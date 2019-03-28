@@ -4,9 +4,8 @@ import axios from "axios";
 import SimpleSlider from "./components/slider/simpleSlider"
 import Description from "./components/description/description"
 import Price from "./components/price/price"
-import Area from "./components/area/area"
 import FullAddress from "./components/full_adress/full_adres"
-
+import Rate from "./components/rate/rate"
 class App extends Component {
     constructor(props) {
         super(props);
@@ -38,9 +37,9 @@ class App extends Component {
                               <div className="menu-info__apartments">
                                   <Description description={description}/>
                                   <FullAddress full_address={full_address}/>
-                                  <Area area={area}/>
                               </div>
-                              <Price price={price}/>
+                                  <Price price={price}/>
+                                  <Rate rating={rating}/>
                           </div>
                       </React.Fragment>
                   })}

@@ -33,35 +33,77 @@
     transform: rotate(360deg);
   }
 }
-
+p{
+  text-align: start;
+  line-height: 1.5;
+}
 img{
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 320px;
 }
 .container__apartments{
   margin:0 5% 0 5%;
 }
-
+.menu__apartments:hover{
+  box-shadow: 2px 4px 6px 1px rgba(0,0,0,.2);
+}
 .menu-info__apartments{
   grid-area: menu-info;
+  border-right: 1px solid #dddfe2;
+  padding-right: 10px;
+
 }
 .price__menu-info{
   grid-area: price;
 }
+.rate__menu-info {
+  grid-area: rate;
+}
+
+
+
 .menu__apartments{
   display: grid;
   margin:5% 0 0 5%;
 
-  grid-gap: 60px;
-  border: 1px solid black;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 0 20px;
+  border: 1px solid #0059ef;
+  grid-template-columns: 1fr 1fr 0.5fr;
   grid-template-areas:
+          "slider menu-info rate "
           "slider menu-info price "
 }
 
-p{
-  text-align: start;
-  line-height: 1.5;
+
+@media only screen and (min-width: 664px) and (max-width: 1000px) {
+  .menu__apartments{
+    display: grid;
+    margin:5% 0 0 5%;
+
+    grid-gap: 0 20px;
+    border: 1px solid #0059ef;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-areas:
+            "slider menu-info "
+            "slider rate "
+            "slider price"
+
+  }
+}
+@media only screen and (min-width: 360px) and (max-width: 664px) {
+  .menu__apartments{
+    display: grid;
+    //padding-right: 150px;
+    margin:5% 0 0 5%;
+    grid-gap: 0 20px;
+    border: 1px solid #0059ef;
+    grid-template-columns: 1fr ;
+    grid-template-areas:
+            "slider  "
+            "menu-info"
+            "rate "
+            "price"
+  }
 }
 
 
