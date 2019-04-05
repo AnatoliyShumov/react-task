@@ -6,6 +6,8 @@ import Description from "./components/description/description"
 import Price from "./components/price/price"
 import FullAddress from "./components/full_adress/full_adres"
 import Rate from "./components/rate/rate"
+// import {stylesPrice} from './components/price/price.scss'
+// import json from './properties.json'
 class App extends Component {
     constructor(props) {
         super(props);
@@ -14,10 +16,13 @@ class App extends Component {
         };
     }
     componentDidMount() {
+        //  let json = ('http://demo4452328.mockable.io/properties')
+        // this.setState({posts:json})
         axios
-            .get(`http://demo4452328.mockable.io/properties`)
+            .get('http://demo4452328.mockable.io/properties')
             .then(res => {
                 const posts = res.data.data;
+                console.log(posts)
                 this.setState({posts: posts})
             }
 
@@ -26,6 +31,7 @@ class App extends Component {
     }
   render() {
          const {posts} = this.state;
+         console.log(posts)
     return (
       <div className="App">
           <div className="container__apartments">
@@ -33,7 +39,7 @@ class App extends Component {
                       const {id, images, price, description, area, full_address, rating} = post;
                       return <React.Fragment>
                           <div className="menu__apartments">
-                              <SimpleSlider  key={id} images={images} rating={rating}id={id}/>
+                              <SimpleSlider  key={id} images={images} rating={rating} id={id}/>
                               <div className="menu-info__apartments">
                                   <Description description={description}/>
                                   <FullAddress full_address={full_address}/>

@@ -1,9 +1,9 @@
 import React from 'react'
-import './price.scss'
+import style from './price.scss'
 const Price = ({price}) => {
     return (
-        <div className="price__menu-info">
-            <p>{price}</p>
+        <div className={style.ar}>
+            <p className={style.ar}>{price}</p>
             <i className="fas fa-hryvnia"></i>
         </div>
 
