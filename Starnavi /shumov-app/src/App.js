@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './App.scss';
 import axios from "axios";
-import SimpleSlider from "./components/slider/simpleSlider"
-import Description from "./components/description/description"
-import Price from "./components/price/price"
-import FullAddress from "./components/full_adress/full_adres"
-import Rate from "./components/rate/rate"
-// import {stylesPrice} from './components/price/price.scss'
-// import json from './properties.json'
+import Tamplates from "./components/templates/templates";
+import PropTypes from 'prop-types';
+
+// const propTypes = {
+//     tamplates: PropTypes.number.isRequired,
+//     posts: PropTypes.object.isRequired,
+// }
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -15,38 +16,44 @@ class App extends Component {
             posts: []
         };
     }
-    componentDidMount() {
-        //  let json = ('http://demo4452328.mockable.io/properties')
-        // this.setState({posts:json})
-        axios
-            .get('http://demo4452328.mockable.io/properties')
-            .then(res => {
-                const posts = res.data.data;
-                console.log(posts)
-                this.setState({posts: posts})
-            }
-
-            )
-            .catch(err => console.log(err))
+    componentWillMount() {
+        axios.all([
+            axios.get('http://demo4452328.mockable.io/properties'),
+            axios.get('http://demo4452328.mockable.io/templates')
+        ])
+            .then(axios.spread((propertiesRes, templatesRes) => {
+                const posts = propertiesRes.data.data;
+                const tamplates = templatesRes.data;
+                this.setState({tamplates})
+                this.setState({
+                    posts: posts,
+                    tamplates
+                })
+            }))
+            .catch(err => console.log(err));
     }
+    randomNumber = () =>{
+        return Math.round(Math.random() * (3 - 1) + 1);
+    }
+    randomTemplates = () => {
+        const {tamplates} = this.state;
+        const random = this.randomNumber();
+        if (random) {
+           return tamplates[random]
+        }
+    }
+
   render() {
          const {posts} = this.state;
-         console.log(posts)
+
     return (
       <div className="App">
           <div className="container__apartments">
                   {posts.map(post => {
                       const {id, images, price, description, area, full_address, rating} = post;
-                      return <React.Fragment>
-                          <div className="menu__apartments">
-                              <SimpleSlider  key={id} images={images} rating={rating} id={id}/>
-                              <div className="menu-info__apartments">
-                                  <Description description={description}/>
-                                  <FullAddress full_address={full_address}/>
-                              </div>
-                                  <Price price={price}/>
-                                  <Rate rating={rating}/>
-                          </div>
+                      const {tamplates} = this.state
+                      return <React.Fragment >
+                          <Tamplates posts={post} randomTamplates={this.randomNumber()} tamplates={tamplates}/>
                       </React.Fragment>
                   })}
           </div>
@@ -55,4 +62,5 @@ class App extends Component {
   }
 }
 
+// App.propTypes = propTypes;
 export default App;

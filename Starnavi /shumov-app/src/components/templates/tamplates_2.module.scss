@@ -1,0 +1,61 @@
+
+
+
+
+.menu__apartments{
+  display: grid;
+  margin:5% 0 0 5%;
+
+  grid-gap: 0 20px;
+  border: 1px solid #0059ef;
+  grid-template-columns: 1fr 1fr 0.5fr;
+  grid-template-areas:
+          "slider menu-info rate "
+          "slider menu-info price ";
+  .price__menu-info{
+    grid-area: price;
+  }
+  .rate__menu-info {
+    grid-area: rate;
+  }
+  .full-address__menu-info{
+    grid-area: full-address;
+  }
+  .menu__apartments-slider{
+    grid-area: slider;
+  }
+}
+
+@media only screen and (min-width: 664px) and (max-width: 1000px) {
+  .menu__apartments{
+    display: grid;
+    margin:5% 0 0 5%;
+
+    grid-gap: 0 20px;
+    border: 1px solid #0059ef;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-areas:
+          "slider menu-info "
+          "slider rate "
+          "slider price"
+
+  }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 664px) {
+  .menu__apartments{
+    display: grid;
+    //padding-right: 150px;
+    margin:5% 0 0 5%;
+    grid-gap: 0 20px;
+    border: 1px solid #0059ef;
+    grid-template-columns: 1fr ;
+    grid-template-areas:
+            "price"
+            "slider "
+            "menu-info"
+            "rate "
+  }
+}
+
+

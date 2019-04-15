@@ -1,0 +1,33 @@
+
+.price{
+  position: absolute;
+
+  font-size: x-large;
+  p{
+    margin-left: 10px;
+    grid-area: price;
+    color: red;
+  }
+  i{
+    margin-left: 10px;
+    grid-area: icon;
+    color: black;
+
+  }
+
+}
+.price{
+  display: grid;
+  align-items: baseline;
+  align-content: end;
+
+
+  grid-template-columns: 0.1fr 0.4fr;
+  grid-template-areas: " price icon";
+}
+
+@media screen and(min-width: 0) and (max-width: 1000px) {
+  .price{
+    grid-template-areas: "icon price";
+  }
+}

@@ -1,8 +1,5 @@
-.ar{
-  background-color: #e12d2d;
-  color: #282c34;
-}
-.price__menu-info{
+
+.price{
 
   font-size: x-large;
   p{
@@ -15,7 +12,7 @@
   }
 
 }
-.price__menu-info{
+.price{
   display: grid;
   align-items: baseline;
   align-content: end;
@@ -26,7 +23,7 @@
 }
 
 @media screen and(min-width: 0) and (max-width: 1000px) {
-  .price__menu-info{
+  .price{
     grid-template-areas: "icon price";
   }
 }
