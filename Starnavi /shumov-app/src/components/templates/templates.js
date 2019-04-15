@@ -5,32 +5,30 @@ import FullAddress from "../full_adress/full_adres";
 import Price from "../price/price";
 import Rate from "../rate/rate";
 import PropTypes from "prop-types";
-import style_1 from "./tamplates_1.module.scss"
-import style_2 from "./tamplates_2.module.scss"
-import style_3 from "./tamplates_3.module.scss"
+import style_1 from "./template_1.module.scss"
+import style_2 from "./template_2.module.scss"
+import style_3 from "./template_3.module.scss"
 
 
 const propTypes = {
 
     posts: PropTypes.object.isRequired,
-    randomTamplates: PropTypes.number,
-    tamplates:PropTypes.array
+    randomTemplate: PropTypes.number,
+    template:PropTypes.array
 }
 
-class Tamplates  extends React.Component {
+class Template  extends React.Component {
     constructor(props) {
         super(props);
-        const {randomTamplates} = this.props;
+        const {randomTemplate} = this.props;
         this.state = {
-            randomTamplates
+            randomTemplate
         };
     }
-
-
     render(){
         const {id, images, price, description, area, full_address, rating} = this.props.posts;
-        const {randomTamplates} = this.props;
-        if(randomTamplates === 1 ) {
+        const {randomTemplate} = this.props;
+        if(randomTemplate === 1 ) {
             return <React.Fragment >
                 <div className={style_1.menu__apartments}>
                     <SimpleSlider  key={id} images={images} rating={rating} id={id}/>
@@ -43,7 +41,7 @@ class Tamplates  extends React.Component {
                 </div>
             </React.Fragment>
         }
-       else if(randomTamplates === 2 ) {
+       else if(randomTemplate=== 2 ) {
             return <React.Fragment >
                 <div className={style_2.menu__apartments}>
                     <div className="menu__apartments-slider">
@@ -58,12 +56,12 @@ class Tamplates  extends React.Component {
                 </div>
             </React.Fragment>
         }
-        else if (randomTamplates === 3 ) {
+        else if (randomTemplate === 3 ) {
             return <React.Fragment >
                 <div className={style_3.menu__apartments}>
                     <div className="menu__apartments-slider">
                         <FullAddress full_address={full_address}/>
-                        <SimpleSlider randomTamplates={randomTamplates} price={price} key={id} images={images} rating={rating} id={id}/>
+                        <SimpleSlider randomTamplates={randomTemplate} price={price} key={id} images={images} rating={rating} id={id}/>
                     </div>
                     <div className="menu-info__apartments">
                         <Description description={description}/>
@@ -74,5 +72,5 @@ class Tamplates  extends React.Component {
         }
     }
 }
-Tamplates.propTypes = propTypes;
-export default Tamplates
+Template.propTypes = propTypes;
+export default Template

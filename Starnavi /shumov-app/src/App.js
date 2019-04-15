@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import axios from "axios";
-import Tamplates from "./components/templates/templates";
+import Template from "./components/templates/templates";
 
 
 class App extends Component {
@@ -18,11 +18,11 @@ class App extends Component {
         ])
             .then(axios.spread((propertiesRes, templatesRes) => {
                 const posts = propertiesRes.data.data;
-                const tamplates = templatesRes.data;
-                this.setState({tamplates})
+                const template = templatesRes.data;
+                this.setState({template})
                 this.setState({
                     posts: posts,
-                    tamplates
+                    template
                 })
             }))
             .catch(err => console.log(err));
@@ -36,9 +36,9 @@ class App extends Component {
       <div className="App">
           <div className="container__apartments">
                   {posts.map(post => {
-                      const {tamplates} = this.state
+                      const {template} = this.state
                       return <React.Fragment >
-                          <Tamplates posts={post} randomTamplates={this.randomNumber()} tamplates={tamplates}/>
+                          <Template posts={post} randomTemplate={this.randomNumber()} template={template}/>
                       </React.Fragment>
                   })}
           </div>
