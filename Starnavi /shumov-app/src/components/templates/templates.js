@@ -12,8 +12,11 @@ import style_3 from "./tamplates_3.module.scss"
 
 const propTypes = {
 
-    posts: PropTypes.number.isRequired,
+    posts: PropTypes.object.isRequired,
+    randomTamplates: PropTypes.number,
+    tamplates:PropTypes.array
 }
+
 class Tamplates  extends React.Component {
     constructor(props) {
         super(props);
@@ -27,7 +30,6 @@ class Tamplates  extends React.Component {
     render(){
         const {id, images, price, description, area, full_address, rating} = this.props.posts;
         const {randomTamplates} = this.props;
-        const {tamplates} = this.state
         if(randomTamplates === 1 ) {
             return <React.Fragment >
                 <div className={style_1.menu__apartments}>
@@ -41,7 +43,6 @@ class Tamplates  extends React.Component {
                 </div>
             </React.Fragment>
         }
-
        else if(randomTamplates === 2 ) {
             return <React.Fragment >
                 <div className={style_2.menu__apartments}>
