@@ -1,0 +1,94 @@
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: normal;
+  src: url("./fonts/Overpass/Overpass-SemiBold.ttf"); }
+@font-face {
+  font-family: 'SourceSansPro';
+  font-style: normal;
+  font-weight: 600;
+  src: url("./fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf"); }
+@font-face {
+  font-family: 'SourceSansProBold';
+  font-style: normal;
+  font-weight: normal;
+  src: url("./fonts/Source_Sans_Pro/SourceSansPro-Bold.ttf"); }
+h1 {
+  font-family: Overpass;
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 60px; }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    h1 {
+      font-size: 42px;
+      line-height: 51px; } }
+  @media (min-width: 320px) and (max-width: 767px) {
+    h1 {
+      font-size: 30px;
+      line-height: 36px; } }
+
+h2 {
+  font-family: Overpass;
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 51px; }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    h2 {
+      line-height: 51px; } }
+  @media (min-width: 320px) and (max-width: 767px) {
+    h2 {
+      font-size: 26px;
+      line-height: 32px; } }
+
+h3 {
+  font-family: Overpass;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 31px; }
+  @media (min-width: 320px) and (max-width: 767px) {
+    h3 {
+      font-size: 22px;
+      line-height: 26px; } }
+
+h4 {
+  font-family: Overpass;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 26px; }
+
+h5 {
+  font-family: SourceSansPro;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px; }
+  @media (min-width: 320px) and (max-width: 767px) {
+    h5 {
+      font-size: 16px; } }
+
+p {
+  font-family: SourceSansPro;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px; }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    p {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px; } }
+  @media (min-width: 320px) and (max-width: 767px) {
+    p {
+      font-size: 16px;
+      line-height: 22px; } }
+
+a {
+  text-decoration: none;
+  color: #000000;
+  font-family: SourceSansPro; }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+/*# sourceMappingURL=App.css.map */
